@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 
-# Intentamos usar colores, si no, se usa texto simple
 try:
     from colorama import init, Fore, Style
     init(autoreset=True)
@@ -9,18 +8,14 @@ except ImportError:
     print("Colorama no disponible, se usarán textos simples")
     Fore = Style = type('', (), {'RESET_ALL':'','RED':'','GREEN':'','CYAN':'','YELLOW':'','MAGENTA':'','WHITE':''})()
 
-# Historial de la sesión
 HISTORIAL = []
 
-# ---------- Funciones auxiliares ----------
 
 def registrar_historial(texto):
-    """Guardar acción en historial"""
     fecha = datetime.now().strftime('%d/%m %H:%M')
     HISTORIAL.append(f"{fecha} - {texto}")
 
 def tamano_legible(size):
-    """Convierte bytes a KB/MB etc"""
     unidades = ['B', 'KB', 'MB', 'GB']
     i = 0
     while size >= 1024 and i < len(unidades)-1:
@@ -44,8 +39,6 @@ def imprimir_ok(msg):
 
 def imprimir_info(msg):
     print(f"{Fore.CYAN}[INFO]{Style.RESET_ALL} {msg}")
-
-# ---------- Funciones principales ----------
 
 def listar_contenido():
     try:
@@ -249,8 +242,6 @@ def mostrar_historial():
     print("Historial de acciones:")
     for i, h in enumerate(HISTORIAL,1):
         print(f"{i}. {h}")
-
-# ---------- Menú principal ----------
 
 def mostrar_menu():
     print("\n" + "="*50)
